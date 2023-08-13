@@ -42,7 +42,7 @@ class DBManager:
             cursor.execute('select * from vacancies')
             for vacancy in cursor.fetchall():
                 print(f"discription: {vacancy[1]}, employeer: {vacancy[2]}, experience: {vacancy[3]},"
-                      f" salary: {vacancy[4]}, url: {vacancy[-1]}")  #4 Первая строка при выводе
+                      f" salary: {vacancy[4]}, url: {vacancy[-1]}")
 
 
     def get_avg_salary(self):
@@ -70,6 +70,6 @@ manager = DBManager()
 #manager.safe_vacancy()
 #print(manager.get_all_vacancies())
 #print(manager.get_companies_and_vacancies_count())
-print(manager.get_vacancies_with_keyword('Спец'))
+#print(manager.get_vacancies_with_keyword('Спец'))
 #print(manager.get_avg_salary())
 

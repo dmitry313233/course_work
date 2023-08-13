@@ -13,16 +13,15 @@ class Pars:
             responce = requests.get(URL).json()
             if responce['items']:
                 pprint(responce['items'])
-                #for j in responce['items']:
-                    #lst.append(self.pars_vanshions(j, i['company']))  # 1Что мы добавляем и из какого метода и почему?
-        #return lst
+                for j in responce['items']:
+                    lst.append(self.pars_vanshions(j, i['company']))
+        return lst
 
     def get_employeers(self, name_companies: list[str]):
         employeer_id = []
         for name in name_companies:
-            URL = f'https://api.hh.ru/employers?text={name}&only_with_vacancies=True'  #2как были найдены слова в фигурных скобках и есть ли взаимосвязь с 22 строкой
+            URL = f'https://api.hh.ru/employers?text={name}&only_with_vacancies=True'
             responce = requests.get(URL).json()
-            # print(responce)
             for id_company in responce['items']:
                 employeer_id.append({'company': name, 'id': id_company['id']})
         return employeer_id
@@ -60,6 +59,6 @@ class Pars:
 #     print(employer)
 
 
-pars = Pars()
+#pars = Pars()
 #pprint(pars.get_vacansions(['МТС'], []))
 # print(pars.get_employeers(['ozon', 'avito']))
