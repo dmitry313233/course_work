@@ -7,6 +7,7 @@ serverPort = 8080
 
 class MyServer(BaseHTTPRequestHandler):
 
+
     def get_html(self):
         with open('<>home_work.html', encoding='utf-8') as file:
             data = file.read()
