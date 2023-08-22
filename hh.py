@@ -12,7 +12,7 @@ class Pars:
             URL = f'https://api.hh.ru/vacancies?per_page=15&employer_id={i["id"]}&text={words}'
             responce = requests.get(URL).json()
             if responce['items']:
-                pprint(responce['items'])
+                #pprint(responce['items'])
                 for j in responce['items']:
                     lst.append(self.pars_vanshions(j, i['company']))
         return lst

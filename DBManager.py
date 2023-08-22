@@ -1,12 +1,13 @@
 import psycopg2
+from config import *
 
 
 class DBManager:
     def __init__(self):
-        self.conn = psycopg2.connect(host='localhost',
-                                     database='vacancy',
-                                     user='postgres',
-                                     password='qwerty')
+        self.conn = psycopg2.connect(host=HOST,
+                                     database=DATABASE,
+                                     user=USE,
+                                     password=PASSWORD)
 
     def safe_vacancy(self, vacancies: list[dict]):
         employeers = []
@@ -33,7 +34,7 @@ class DBManager:
     def get_companies_and_vacancies_count(self):
         with self.conn.cursor() as cursor:
             cursor.execute('select count(id), employer from vacancies group by employer')
-            #print(cursor.fetchall())
+            # print(cursor.fetchall())
             for company_name, count in cursor.fetchall():
                 print(f"company: {count}, count: {company_name}")
 
@@ -43,7 +44,6 @@ class DBManager:
             for vacancy in cursor.fetchall():
                 print(f"discription: {vacancy[1]}, employeer: {vacancy[2]}, experience: {vacancy[3]},"
                       f" salary: {vacancy[4]}, url: {vacancy[-1]}")
-
 
     def get_avg_salary(self):
         with self.conn.cursor() as cursor:
@@ -55,9 +55,8 @@ class DBManager:
             cursor.execute(f'select * from vacancies where salary > {self.get_avg_salary()}')
             for vacancy in cursor.fetchall():
                 print(vacancy[1])
-            #print(cursor.fetchall())
-            #print(self.get_avg_salary()
-
+            # print(cursor.fetchall())
+            # print(self.get_avg_salary()
 
     def get_vacancies_with_keyword(self, *keyword: str):
         with self.conn.cursor() as cursor:
@@ -65,11 +64,9 @@ class DBManager:
             for vacancy in cursor.fetchall():
                 print((vacancy[1]))
 
-
-manager = DBManager()
+#manager = DBManager()
 #manager.safe_vacancy()
-#print(manager.get_all_vacancies())
-#print(manager.get_companies_and_vacancies_count())
-#print(manager.get_vacancies_with_keyword('Спец'))
-#print(manager.get_avg_salary())
-
+# print(manager.get_all_vacancies())
+# print(manager.get_companies_and_vacancies_count())
+# print(manager.get_vacancies_with_keyword('Спец'))
+# print(manager.get_avg_salary())
